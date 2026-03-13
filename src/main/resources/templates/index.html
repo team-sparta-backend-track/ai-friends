@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#fdf2f8" />
+  <title>HeartMate Chat</title>
+  <!-- 한글 웹폰트: 본문 Noto Sans KR, 제목 Jua -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- 모듈 방식 CSS (순서 유지) -->
+  <link rel="stylesheet" th:href="@{/css/variables.css}" />
+  <link rel="stylesheet" th:href="@{/css/base.css}" />
+  <link rel="stylesheet" th:href="@{/css/animations.css}" />
+  <link rel="stylesheet" th:href="@{/css/layout.css}" />
+  <link rel="stylesheet" th:href="@{/css/landing.css}" />
+  <link rel="stylesheet" th:href="@{/css/soulmate-list.css}" />
+</head>
+<body>
+  <div class="app-root" data-app-root>
+    <main class="main-container">
+      <!-- 상태 A: 랜딩 (소울메이트 0명) -->
+      <section class="landing" data-view="landing" role="region" aria-label="랜딩">
+        <button type="button" class="landing__cta" data-landing-cta>Start Chat</button>
+      </section>
+
+      <!-- 상태 B: 메이트 선택 (1~3명) -->
+      <section class="soulmate-list" data-view="soulmate-list" hidden role="region" aria-label="소울메이트 선택">
+        
+        <ul class="soulmate-list__cards" data-soulmate-cards aria-label="소울메이트 목록">
+          <!-- js/soulmate-list.js에서 동적 렌더 -->
+        </ul>
+        <button type="button" class="soulmate-list__new-btn" data-soulmate-new-btn>Create New</button>
+        <p class="soulmate-list__max-hint" data-soulmate-max-hint hidden>최대 3명까지 생성 가능해요</p>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" th:src="@{/js/pages/home/index.js}"></script>
+</body>
+</html>

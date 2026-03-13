@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1f2937" />
+  <title>대화 | AI 이성친구</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" th:href="@{/css/variables.css}" />
+  <link rel="stylesheet" th:href="@{/css/base.css}" />
+  <link rel="stylesheet" th:href="@{/css/animations.css}" />
+  <link rel="stylesheet" th:href="@{/css/layout.css}" />
+  <link rel="stylesheet" th:href="@{/css/chat.css}" />
+</head>
+<body>
+  <div class="app-root" data-app-root data-soulmate-id th:attr="data-soulmate-id=${soulmateId}">
+    <main class="main-container main-container--chat">
+      <!-- 풀스크린 캐릭터 배경 -->
+      <div class="chat-bg" data-chat-bg aria-hidden="true">
+        <div class="chat-bg__overlay"></div>
+      </div>
+
+      <!-- 호감도·레벨 상단 표시 + 햄버거 메뉴 -->
+      <header class="chat-status" data-chat-status aria-label="호감도와 레벨">
+        <span class="chat-status__affection" data-chat-status-affection>
+          <img class="chat-status__affection-icon" src="/images/ui/ui-heart.png" alt="" aria-hidden="true" />
+          <span class="chat-status__affection-value" data-chat-status-affection-value>0</span>
+        </span>
+        <span class="chat-status__level" data-chat-status-level>Lv.1</span>
+        <div class="chat-status__menu-wrap">
+          <button type="button" class="chat-status__hamburger" data-chat-hamburger aria-label="메뉴 열기" aria-expanded="false">
+            <span class="chat-status__hamburger-bar"></span>
+            <span class="chat-status__hamburger-bar"></span>
+            <span class="chat-status__hamburger-bar"></span>
+          </button>
+          <div class="chat-status__dropdown" data-chat-dropdown hidden>
+            <a href="/" class="chat-status__dropdown-item" data-chat-menu-home aria-label="홈으로">
+              <span class="chat-status__dropdown-icon" aria-hidden="true">⌂</span>
+              <span>홈</span>
+            </a>
+            <button type="button" class="chat-status__dropdown-item" data-chat-menu-history aria-label="대화 기록">
+              <span class="chat-status__dropdown-icon" aria-hidden="true">💬</span>
+              <span>대화 기록</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- 대화/다이얼로그 영역 (일반 모드) -->
+      <section class="chat-dialog" data-chat-dialog>
+        <div class="chat-dialog__messages" data-chat-messages>
+          <!-- JS에서 AI 메시지 + 호감도 추가 -->
+        </div>
+        <div class="chat-dialog__affection" data-chat-affection hidden aria-live="polite">
+          <span data-chat-affection-delta></span>
+          <span class="chat-dialog__level-up" data-chat-level-up hidden></span>
+        </div>
+      </section>
+
+      <!-- 하단 입력 영역 (카카오톡 스타일) -->
+      <footer class="chat-footer">
+        <div class="chat-input-wrap">
+          <input
+            type="text"
+            class="chat-input"
+            data-chat-input
+            placeholder="메시지를 입력하세요"
+            maxlength="500"
+            autocomplete="off"
+          />
+          <button type="button" class="chat-send" data-chat-send aria-label="전송">
+            <span class="chat-send__icon" data-chat-send-icon aria-hidden="true">➤</span>
+            <span class="chat-send__loading" data-chat-send-loading hidden aria-hidden="true">
+              <span class="chat-loading-dot"></span>
+              <span class="chat-loading-dot"></span>
+              <span class="chat-loading-dot"></span>
+            </span>
+          </button>
+        </div>
+      </footer>
+
+      <!-- 선택지 모달 (choices 있을 때만 표시) -->
+      <div class="chat-choice-modal" data-chat-choice-modal hidden aria-modal="true" role="dialog" aria-label="선택지">
+        <div class="chat-choice-modal__backdrop" data-chat-choice-backdrop></div>
+        <div class="chat-choice-modal__content">
+          <p class="chat-choice-modal__message" data-chat-choice-message></p>
+          <div class="chat-choice-modal__buttons" data-chat-choice-buttons></div>
+        </div>
+      </div>
+
+      <!-- 대화 기록 모달 (카카오톡 스타일, 위로 스크롤 시 이전 페이지 로드) -->
+      <div class="chat-history-modal" data-chat-history-modal hidden aria-modal="true" role="dialog" aria-label="대화 기록">
+        <div class="chat-history-modal__backdrop" data-chat-history-backdrop></div>
+        <div class="chat-history-modal__panel">
+          <header class="chat-history-modal__header">
+            <h2 class="chat-history-modal__title">대화 기록</h2>
+            <button type="button" class="chat-history-modal__close" data-chat-history-close aria-label="닫기">×</button>
+          </header>
+          <div class="chat-history-modal__scroll" data-chat-history-scroll>
+            <div class="chat-history-modal__list" data-chat-history-list></div>
+            <div class="chat-history-modal__load" data-chat-history-load hidden>이전 대화 불러오는 중…</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" th:src="@{/js/pages/chat/index.js}"></script>
+</body>
+</html>
