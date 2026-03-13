@@ -3,7 +3,7 @@ spring:
     name: ai-friends
 
   datasource:
-    url: ${DB_URL}
+    url: jdbc:h2:mem:aifriends;DB_CLOSE_DELAY=-1
     driver-class-name: org.h2.Driver
     username: sa
     password:
